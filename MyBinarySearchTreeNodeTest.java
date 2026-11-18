@@ -60,7 +60,7 @@ class MyBinarySearchTreeNodeTest {
         MyBinarySearchTreeNode<Integer> root = createTraversalTree();
 
         root.preOrder(items);
-
+ 
         assertEquals(List.of(151, 150, 241, 210, 275, 280), items);
     }
 
