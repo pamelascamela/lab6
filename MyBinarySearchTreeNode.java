@@ -29,7 +29,7 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
         if (this.item.compareTo(item) == 0){
             return null;
         }
-        if (this.item.compareTo(item) < 0 ){
+        if (this.item.compareTo(item) > 0 ){
             if (this.leftChild == null){
                 MyBinarySearchTreeNode<T> newLeft = new MyBinarySearchTreeNode<T>(item, this);
                 this.leftChild = newLeft;
@@ -39,7 +39,7 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
                 return this.leftChild.insert(item);
             }
         }
-        if (this.item.compareTo(item) > 0 ){
+        if (this.item.compareTo(item) < 0 ){
             if (this.rightChild == null){
                 MyBinarySearchTreeNode<T> newRight = new MyBinarySearchTreeNode<T>(item, this);
                 this.rightChild = newRight;
@@ -85,14 +85,14 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
             return this;
         }
         if (this.item.compareTo(obj) < 0){
-            if (this.leftChild!= null){
-                return this.leftChild.find(obj);
+            if (this.rightChild!= null){
+                return this.rightChild.find(obj);
             }
             return null;
         }
         if (this.item.compareTo(obj) > 0){
-            if (this.rightChild!= null){
-                return this.rightChild.find(obj);
+            if (this.leftChild!= null){
+                return this.leftChild.find(obj);
             }
             return null;
             
@@ -155,8 +155,8 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
 
             MyBinarySearchTreeNode<T> saved = current.findSuccessor();
             T savedItem = saved.item;
-            current.item = savedItem;
             saved.remove(savedItem);
+            current.item = savedItem;
             return;
         }
 

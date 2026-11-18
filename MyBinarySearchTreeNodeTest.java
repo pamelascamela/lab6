@@ -61,7 +61,7 @@ class MyBinarySearchTreeNodeTest {
 
         root.preOrder(items);
 
-        assertEquals(List.of(151, 241, 275, 280, 210, 150), items);
+        assertEquals(List.of(151, 150, 241, 210, 275, 280), items);
     }
 
     @Test
@@ -71,7 +71,7 @@ class MyBinarySearchTreeNodeTest {
 
         root.inOrder(items);
 
-        assertEquals(List.of(280, 275, 241, 210, 151, 150), items);
+        assertEquals(List.of(150, 151, 210, 241, 275, 280), items);
     }
 
     @Test
@@ -81,7 +81,7 @@ class MyBinarySearchTreeNodeTest {
 
         root.postOrder(items);
 
-        assertEquals(List.of(280, 275, 210, 241, 150, 151), items);
+        assertEquals(List.of(150, 210, 280, 275, 241, 151), items);
     }
 
     @Test
@@ -109,5 +109,118 @@ class MyBinarySearchTreeNodeTest {
         assertNull(root.find(200));
         assertNull(root.find(242));
         assertNull(root.find(281));
+    }
+
+    @Test
+    void testRemoveLeftLeaf() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        root.insert(30);
+        root.insert(70);
+
+        root.remove(30);
+
+        assertNull(root.find(30));
+        assertInOrder(root, List.of(50, 70));
+    }
+
+    @Test
+    void testRemoveRightLeaf() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        root.insert(30);
+        root.insert(70);
+
+        root.remove(70);
+
+        assertNull(root.find(70));
+        assertInOrder(root, List.of(30, 50));
+    }
+
+    @Test
+    void testRemoveLeftChildWithOnlyLeftChild() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        root.insert(30);
+        MyBinarySearchTreeNode<Integer> child = root.insert(20);
+
+        root.remove(30);
+
+        assertNull(root.find(30));
+        assertSame(root, child.getParent());
+        assertInOrder(root, List.of(20, 50));
+    }
+
+    @Test
+    void testRemoveLeftChildWithOnlyRightChild() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        root.insert(30);
+        MyBinarySearchTreeNode<Integer> child = root.insert(40);
+
+        root.remove(30);
+
+        assertNull(root.find(30));
+        assertSame(root, child.getParent());
+        assertInOrder(root, List.of(40, 50));
+    }
+
+    @Test
+    void testRemoveRightChildWithOnlyLeftChild() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        root.insert(70);
+        MyBinarySearchTreeNode<Integer> child = root.insert(60);
+
+        root.remove(70);
+
+        assertNull(root.find(70));
+        assertSame(root, child.getParent());
+        assertInOrder(root, List.of(50, 60));
+    }
+
+    @Test
+    void testRemoveRightChildWithOnlyRightChild() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        root.insert(70);
+        MyBinarySearchTreeNode<Integer> child = root.insert(80);
+
+        root.remove(70);
+
+        assertNull(root.find(70));
+        assertSame(root, child.getParent());
+        assertInOrder(root, List.of(50, 80));
+    }
+
+    @Test
+    void testRemoveNodeWithTwoChildrenAndLeafSuccessor() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        MyBinarySearchTreeNode<Integer> target = root.insert(30);
+        root.insert(20);
+        root.insert(40);
+
+        root.remove(30);
+
+        assertNull(root.find(30));
+        assertSame(target, root.find(40));
+        assertInOrder(root, List.of(20, 40, 50));
+    }
+
+    @Test
+    void testRemoveNodeWithTwoChildrenAndSuccessorWithChild() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(50);
+        MyBinarySearchTreeNode<Integer> target = root.insert(30);
+        root.insert(20);
+        root.insert(40);
+        MyBinarySearchTreeNode<Integer> successorChild = root.insert(45);
+
+        root.remove(30);
+
+        assertNull(root.find(30));
+        assertSame(target, root.find(40));
+        assertSame(successorChild, root.find(45));
+        assertSame(target, successorChild.getParent());
+        assertInOrder(root, List.of(20, 40, 45, 50));
+    }
+
+    private void assertInOrder(MyBinarySearchTreeNode<Integer> root, List<Integer> expected) {
+        List<Integer> items = new ArrayList<>();
+        root.inOrder(items);
+        assertEquals(expected, items);
     }
 }
