@@ -80,4 +80,24 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
         list.add(this.item);
     }
 
+    public MyBinarySearchTreeNode<T> find(Object obj){
+        if (this.item.compareTo(obj) == 0){
+            return this;
+        }
+        if (this.item.compareTo(obj) < 0){
+            if (this.leftChild!= null){
+                return this.leftChild.find(obj);
+            }
+            return null;
+        }
+        if (this.item.compareTo(obj) > 0){
+            if (this.rightChild!= null){
+                return this.rightChild.find(obj);
+            }
+            return null;
+            
+        }
+        return null;
+    }
+
 }
