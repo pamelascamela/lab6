@@ -1,0 +1,1 @@
+Prediction: the rest of the code clearly sorts and prints the list of new contacts after creating more contact objects.
