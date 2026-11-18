@@ -37,8 +37,12 @@ public class LinkedNode {
      * @return The sum of numbers in the linked list starting
      *         with this node.
      */
-    public int sum() {
-        /* Your solution goes here */
-        return 0; // delete this line
+    public int sum() { 
+        if (this == null){
+            return 0;
+        }
+        return this.item + this.next.sum();
     }
+
 }
+
