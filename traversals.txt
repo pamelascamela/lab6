@@ -1,0 +1,4 @@
+Tree (by row left-to-right): A, B, C, D, E, F, G, H, I, J, K, L, M, N, O
+Pre-Order Traversal: A, B, D, H, I, E, J, K, C, F, L, M, G, N, O
+In-Order Traversal: H, D, I, B, J, E, K, A, L, F, M, C, N, G, O
+Post-Order Traversal: H, I, D, J, K, E, B, L, M, F, N, O, G, C, A
