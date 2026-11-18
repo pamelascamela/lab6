@@ -14,8 +14,10 @@ public class Recursion {
      * @return The reversed String
      */
     public static String rev(String s) {
-        /* Your solution goes here */
-        return ""; // delete this line
+        if (s.length() == 0){
+            return "";
+        }
+        return s.charAt(0) + s.substring(1);
     }
 
     /**
