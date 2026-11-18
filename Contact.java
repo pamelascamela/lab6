@@ -57,8 +57,9 @@ public class Contact implements Comparable<Contact> {
      */
     @Override
     public int compareTo(Contact other) {
-        /* Implement your comparison method here. */
-        return 0; // Placeholder -- please remove this
+        String otherName = other.name;
+        String thisName = this.name;
+        return thisName.compareToIgnoreCase(otherName);
     }
 
     /**
@@ -70,7 +71,7 @@ public class Contact implements Comparable<Contact> {
     public static void main(String[] args) {
         /* This first set of lines helps us see what happens when we call compareTo. */
         
-        /* [REMOVE THIS LINE TO TEST]
+
         // create a couple contacts
         Contact c1 = new Contact("Adam", "King 125B");
         Contact c2 = new Contact("Howard", "King 139C");
@@ -80,7 +81,7 @@ public class Contact implements Comparable<Contact> {
         System.out.println("c1 compareTo c1: " + c1.compareTo(c1));
         System.out.println("c2 compareTo c1: " + c2.compareTo(c1));
         System.out.println(); // add a blank line of output
-        [REMOVE THIS LINE TO TEST] */
+
 
         /* The rest of this code investigates what happens when we use 
          * compareTo to help us sort data. */

@@ -70,7 +70,7 @@ public class Recursion {
         numbers.add(4);
 
         System.out.println("The sum of 1 through 4 is " + sum(numbers));
-        System.out.println("Array Size: " + numbers.size());
+        System.out.println("Array Size: "+ numbers.size());
 
     }
 }
