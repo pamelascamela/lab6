@@ -15,6 +15,12 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
         this(item, null);
     }
 
+    public T getItem(){
+        return this.item;
+    }
 
+    public MyBinarySearchTreeNode<T> getParent(){
+        return this.parent;
+    }
 
 }
