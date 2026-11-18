@@ -38,8 +38,8 @@ public class LinkedNode {
      *         with this node.
      */
     public int sum() { 
-        if (this == null){
-            return 0;
+        if (this.next == null){
+            return this.item;
         }
         return this.item + this.next.sum();
     }

@@ -51,12 +51,12 @@ public class Recursion {
 
         /* Testing the linked list sum function */
 
-        // LinkedNode node = new LinkedNode(4);
-        // node = new LinkedNode(3, node);
-        // node = new LinkedNode(2, node);
-        // node = new LinkedNode(1, node);
+        LinkedNode node = new LinkedNode(4);
+        node = new LinkedNode(3, node);
+        node = new LinkedNode(2, node);
+        node = new LinkedNode(1, node);
 
-        // System.out.println("The sum of 1 through 4 is " + node.sum());
+        System.out.println("The sum of 1 through 4 is " + node.sum());
 
         /* Testing the array list sum function */
 
