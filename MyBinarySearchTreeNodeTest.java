@@ -84,5 +84,30 @@ class MyBinarySearchTreeNodeTest {
         assertEquals(List.of(280, 275, 210, 241, 150, 151), items);
     }
 
-    
+    @Test
+    void testFindReturnsMatchingNodeForEveryItem() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(151);
+        MyBinarySearchTreeNode<Integer> node150 = root.insert(150);
+        MyBinarySearchTreeNode<Integer> node241 = root.insert(241);
+        MyBinarySearchTreeNode<Integer> node210 = root.insert(210);
+        MyBinarySearchTreeNode<Integer> node275 = root.insert(275);
+        MyBinarySearchTreeNode<Integer> node280 = root.insert(280);
+
+        assertSame(root, root.find(151));
+        assertSame(node150, root.find(150));
+        assertSame(node241, root.find(241));
+        assertSame(node210, root.find(210));
+        assertSame(node275, root.find(275));
+        assertSame(node280, root.find(280));
+    }
+
+    @Test
+    void testFindReturnsNullForMissingItems() {
+        MyBinarySearchTreeNode<Integer> root = createTraversalTree();
+
+        assertNull(root.find(149));
+        assertNull(root.find(200));
+        assertNull(root.find(242));
+        assertNull(root.find(281));
+    }
 }
