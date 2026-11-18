@@ -17,7 +17,7 @@ public class Recursion {
         if (s.length() == 0){
             return "";
         }
-        return s.charAt(0) + s.substring(1);
+        return s.charAt(s.length()-1) + rev(s.substring(0, s.length()-1));
     }
 
     /**
@@ -41,8 +41,13 @@ public class Recursion {
     public static void main(String args[]) {
         /* Testing the rev function */
 
-        // String behold = "Behold the power of recursion!";
-        // System.out.println("The reverse of " + behold + " is " + rev(behold));
+        String behold = "Behold the power of recursion!";
+        System.out.println("The reverse of " + behold + " is " + rev(behold));
+        String test = "CS 151 is fun!";
+        System.out.println(test);
+        System.out.println(rev(test));
+
+       
 
         /* Testing the linked list sum function */
 
