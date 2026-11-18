@@ -45,6 +45,15 @@ class MyBinarySearchTreeNodeTest {
         assertNull(root.insert(10));
     }
 
+    private MyBinarySearchTreeNode<Integer> createTraversalTree() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(151);
+        root.insert(150);
+        root.insert(241);
+        root.insert(210);
+        root.insert(275);
+        root.insert(280);
+        return root;
+    }
     @Test
     void testPreOrderTraversal() {
         List<Integer> items = new ArrayList<>();
@@ -75,13 +84,5 @@ class MyBinarySearchTreeNodeTest {
         assertEquals(List.of(280, 275, 210, 241, 150, 151), items);
     }
 
-    private MyBinarySearchTreeNode<Integer> createTraversalTree() {
-        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(151);
-        root.insert(150);
-        root.insert(241);
-        root.insert(210);
-        root.insert(275);
-        root.insert(280);
-        return root;
-    }
+    
 }
