@@ -29,15 +29,10 @@ public class Recursion {
      * @return The sum of all the Integers stored in {@code numbers}
      */
     public static int sum (ArrayList<Integer> numbers) {
-        if (numbers.get(1) == null){
-
-            return numbers.get(0);
+        if (numbers.size() == 1){
+            return numbers.remove(0);
         }
-        return numbers.get(0) + sum(numbers.sublist(1));
-  
-
-
-        return 0; // delete this line
+        return numbers.remove(0) + sum(numbers);
     }
 
     /**
@@ -67,14 +62,15 @@ public class Recursion {
 
         /* Testing the array list sum function */
 
-        // ArrayList<Integer> numbers = new ArrayList<Integer>();
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
 
-        // numbers.add(1);
-        // numbers.add(2);
-        // numbers.add(3);
-        // numbers.add(4);
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
 
-        // System.out.println("The sum of 1 through 4 is " + sum(numbers));
+        System.out.println("The sum of 1 through 4 is " + sum(numbers));
+        System.out.println("Array Size: " + numbers.size());
 
     }
 }
