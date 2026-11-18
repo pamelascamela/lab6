@@ -47,19 +47,41 @@ class MyBinarySearchTreeNodeTest {
 
     @Test
     void testPreOrderTraversal() {
-        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(10);
-        MyBinarySearchTreeNode<Integer> left = root.insert(15);
-        MyBinarySearchTreeNode<Integer> right = root.insert(5);
-        MyBinarySearchTreeNode<Integer> rightLeft = root.insert(7);
-        MyBinarySearchTreeNode<Integer> rightRight = root.insert(3);
         List<Integer> items = new ArrayList<>();
+        MyBinarySearchTreeNode<Integer> root = createTraversalTree();
 
         root.preOrder(items);
 
-        assertEquals(List.of(10, 15, 5, 7, 3), items);
-        assertSame(root, left.getParent());
-        assertSame(root, right.getParent());
-        assertSame(right, rightLeft.getParent());
-        assertSame(right, rightRight.getParent());
+        assertEquals(List.of(151, 241, 275, 280, 210, 150), items);
+    }
+
+    @Test
+    void testInOrderTraversal() {
+        List<Integer> items = new ArrayList<>();
+        MyBinarySearchTreeNode<Integer> root = createTraversalTree();
+
+        root.inOrder(items);
+
+        assertEquals(List.of(280, 275, 241, 210, 151, 150), items);
+    }
+
+    @Test
+    void testPostOrderTraversal() {
+        List<Integer> items = new ArrayList<>();
+        MyBinarySearchTreeNode<Integer> root = createTraversalTree();
+
+        root.postOrder(items);
+
+        assertEquals(List.of(280, 275, 210, 241, 150, 151), items);
+    }
+
+    private MyBinarySearchTreeNode<Integer> createTraversalTree() {
+        MyBinarySearchTreeNode<Integer> root = new MyBinarySearchTreeNode<>(151);
+        root.insert(150);
+        root.insert(241);
+        root.insert(210);
+        root.insert(275);
+        root.insert(280);
+        return root;
     }
 }

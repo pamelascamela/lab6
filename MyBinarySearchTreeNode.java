@@ -63,19 +63,19 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
     }
     public void inOrder(List<T> list){
         if (this.leftChild != null) {
-            this.leftChild.preOrder(list);
+            this.leftChild.inOrder(list);
         }
         list.add(this.item);
         if (this.rightChild != null) {
-            this.rightChild.preOrder(list);
+            this.rightChild.inOrder(list);
         }
     }
     public void postOrder(List<T> list){
         if (this.leftChild != null) {
-            this.leftChild.preOrder(list);
+            this.leftChild.postOrder(list);
         }
         if (this.rightChild != null) {
-            this.rightChild.preOrder(list);
+            this.rightChild.postOrder(list);
         }
         list.add(this.item);
     }
