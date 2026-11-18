@@ -29,7 +29,14 @@ public class Recursion {
      * @return The sum of all the Integers stored in {@code numbers}
      */
     public static int sum (ArrayList<Integer> numbers) {
-        /* Your solution goes here */
+        if (numbers.get(1) == null){
+
+            return numbers.get(0);
+        }
+        return numbers.get(0) + sum(numbers.sublist(1));
+  
+
+
         return 0; // delete this line
     }
 
