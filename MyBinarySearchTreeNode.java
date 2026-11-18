@@ -100,4 +100,14 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
         return null;
     }
 
+    private MyBinarySearchTreeNode<T> findSuccessor(){
+        if (this.rightChild != null){
+            this.rightChild = this;
+        }
+        while (this.leftChild != null){
+            this.leftChild = this;
+        }
+        return this;
+    }
+
 }
