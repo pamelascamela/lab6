@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class MyBinarySearchTreeNode<T extends Comparable>{
     private T item;
     private MyBinarySearchTreeNode<T> parent;
@@ -48,6 +50,34 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
             }
         }
         return null;
+    }
+
+    public void preOrder(List<T> list){
+        list.add(this.item);
+        if (this.leftChild != null) {
+            this.leftChild.preOrder(list);
+        }
+        if (this.rightChild != null) {
+            this.rightChild.preOrder(list);
+        }
+    }
+    public void inOrder(List<T> list){
+        if (this.leftChild != null) {
+            this.leftChild.preOrder(list);
+        }
+        list.add(this.item);
+        if (this.rightChild != null) {
+            this.rightChild.preOrder(list);
+        }
+    }
+    public void postOrder(List<T> list){
+        if (this.leftChild != null) {
+            this.leftChild.preOrder(list);
+        }
+        if (this.rightChild != null) {
+            this.rightChild.preOrder(list);
+        }
+        list.add(this.item);
     }
 
 }
