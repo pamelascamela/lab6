@@ -110,4 +110,42 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
         return this;
     }
 
+    public void remove(T item){
+        if (this.item.compareTo(item) == 0){
+            if (this.leftChild == null && this.rightChild == null){
+                if (this.item.compareTo(parent.item) < 0){
+                    parent.leftChild = null;
+                }
+                if (this.item.compareTo(parent.item) > 0){
+                    parent.rightChild = null;
+                }
+            }
+            if (this.leftChild != null && this.rightChild == null){
+                if (this.item.compareTo(parent.item) < 0){
+                    parent.leftChild = this.leftChild;
+                }
+                if (this.item.compareTo(parent.item) > 0){
+                    parent.rightChild = this.leftChild;
+                }
+            }
+            if (this.leftChild == null && this.rightChild != null){
+                if (this.item.compareTo(parent.item) < 0){
+                    parent.leftChild = this.rightChild;
+                }
+                if (this.item.compareTo(parent.item) > 0){
+                    parent.rightChild = this.rightChild;
+                }
+            }
+            MyBinarySearchTreeNode<T> saved = this.findSuccessor();
+            T savedItem = saved.item;
+            this.remove(savedItem);
+            this.item = savedItem;
+
+    }
+        if (this.item.compareTo(item) < 0){
+            this.rightChild.remove(item);
+        }
+
+        this.leftChild.remove(item);
+    }
 }
