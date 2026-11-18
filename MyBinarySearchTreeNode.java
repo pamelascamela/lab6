@@ -102,50 +102,73 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
 
     private MyBinarySearchTreeNode<T> findSuccessor(){
         if (this.rightChild != null){
-            this.rightChild = this;
+            MyBinarySearchTreeNode<T> current = this.rightChild;
+            while (current.leftChild != null){
+            current = current.leftChild;
         }
-        while (this.leftChild != null){
-            this.leftChild = this;
+        return current;
         }
         return this;
     }
 
     public void remove(T item){
-        if (this.item.compareTo(item) == 0){
-            if (this.leftChild == null && this.rightChild == null){
-                if (this.item.compareTo(parent.item) < 0){
-                    parent.leftChild = null;
-                }
-                if (this.item.compareTo(parent.item) > 0){
-                    parent.rightChild = null;
-                }
-            }
-            if (this.leftChild != null && this.rightChild == null){
-                if (this.item.compareTo(parent.item) < 0){
-                    parent.leftChild = this.leftChild;
-                }
-                if (this.item.compareTo(parent.item) > 0){
-                    parent.rightChild = this.leftChild;
-                }
-            }
-            if (this.leftChild == null && this.rightChild != null){
-                if (this.item.compareTo(parent.item) < 0){
-                    parent.leftChild = this.rightChild;
-                }
-                if (this.item.compareTo(parent.item) > 0){
-                    parent.rightChild = this.rightChild;
-                }
-            }
-            MyBinarySearchTreeNode<T> saved = this.findSuccessor();
-            T savedItem = saved.item;
-            this.remove(savedItem);
-            this.item = savedItem;
+        MyBinarySearchTreeNode<T> current = this;
 
-    }
-        if (this.item.compareTo(item) < 0){
-            this.rightChild.remove(item);
+        if (current.item.compareTo(item) == 0){
+            if (current.leftChild == null && current.rightChild == null){
+                if (current.parent != null){
+                    if (current.item.compareTo(current.parent.item) < 0){
+                        current.parent.leftChild = null;
+                    }
+                    if (current.item.compareTo(current.parent.item) > 0){
+                        current.parent.rightChild = null;
+                    }
+                }
+                return;
+            }
+
+            if (current.leftChild != null && current.rightChild == null){
+                if (current.parent != null){
+                    if (current.item.compareTo(current.parent.item) < 0){
+                        current.parent.leftChild = current.leftChild;
+                    }
+                    if (current.item.compareTo(current.parent.item) > 0){
+                        current.parent.rightChild = current.leftChild;
+                    }
+                }
+                current.leftChild.parent = current.parent;
+                return;
+            }
+
+            if (current.leftChild == null && current.rightChild != null){
+                if (current.parent != null){
+                    if (current.item.compareTo(current.parent.item) < 0){
+                        current.parent.leftChild = current.rightChild;
+                    }
+                    if (current.item.compareTo(current.parent.item) > 0){
+                        current.parent.rightChild = current.rightChild;
+                    }
+                }
+                current.rightChild.parent = current.parent;
+                return;
+            }
+
+            MyBinarySearchTreeNode<T> saved = current.findSuccessor();
+            T savedItem = saved.item;
+            current.item = savedItem;
+            saved.remove(savedItem);
+            return;
         }
 
-        this.leftChild.remove(item);
-    }
+        if (current.item.compareTo(item) < 0){
+            if (current.rightChild != null){
+                current.rightChild.remove(item);
+            }
+        }
+        else {
+            if (current.leftChild != null){
+                current.leftChild.remove(item);
+            }
+        }
+}
 }
