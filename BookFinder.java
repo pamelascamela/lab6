@@ -240,11 +240,11 @@ public class BookFinder {
          * - Else, return the list of BookData from inside the BookLookup
          *   stored in the node.
          */
-        MyBinarySearchTreeNode<BookLookup> authorNode = this.isbnToData.find(author);
+        MyBinarySearchTreeNode<BookLookup> authorNode = this.authorToData.find(author);
         if(authorNode == null){
             return new ArrayList<BookData>();
         }
-        return authorNode.getItem().getBooks();    
+        return authorNode.getItem().getBooks();
     }
 
     /**
@@ -262,7 +262,7 @@ public class BookFinder {
          * - Else, return the list of BookData from inside the BookLookup
          *   stored in the node.
          */
-        MyBinarySearchTreeNode<BookLookup> titleNode = this.isbnToData.find(title);
+        MyBinarySearchTreeNode<BookLookup> titleNode = this.titleToData.find(title);
         if(titleNode == null){
             return new ArrayList<BookData>();
         }
@@ -284,7 +284,7 @@ public class BookFinder {
          * - Else, return the list of BookData from inside the BookLookup
          *   stored in the node.
          */
-        MyBinarySearchTreeNode<BookLookup> publisherNode = this.isbnToData.find(publisher);
+        MyBinarySearchTreeNode<BookLookup> publisherNode = this.publisherToData.find(publisher);
         if(publisherNode == null){
             return new ArrayList<BookData>();
         } 
