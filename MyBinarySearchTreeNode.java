@@ -111,64 +111,88 @@ public class MyBinarySearchTreeNode<T extends Comparable>{
         return this;
     }
 
+
+//i also made two helper methods here for children and parent checks because we use that a lot in remove and i didnt want to have to rewrite everything all the time
+    private MyBinarySearchTreeNode<T> checkChildren(){
+        if (this.leftChild == null && this.rightChild == null){
+            return null; //is leaf
+        }
+        if (this.leftChild == null && this.rightChild != null){
+            return rightChild; // has a right child only
+        }
+        if (this.leftChild != null && this.rightChild == null){
+            return leftChild; //has a left child only
+        }
+        return this; //has two children
+    }
+
+    private int checkParent(){
+        if (this.parent == null){
+            return 0; //is the left child
+        }
+        if (this.parent.leftChild == this){
+            return -1; //is the left child
+        }
+        if (this.parent.rightChild == this){
+            return 1; // is the right child
+        }
+        return 0; //is root
+    }
+
+
     public void remove(T item){
-        MyBinarySearchTreeNode<T> current = this;
-
-        if (current.item.compareTo(item) == 0){
-            if (current.leftChild == null && current.rightChild == null){
-                if (current.parent != null){
-                    if (current.item.compareTo(current.parent.item) < 0){
-                        current.parent.leftChild = null;
-                    }
-                    if (current.item.compareTo(current.parent.item) > 0){
-                        current.parent.rightChild = null;
-                    }
-                }
-                return;
+        //if current item is bigger than searched item
+        int compareResult = this.item.compareTo(item);
+        if (compareResult > 0){
+            if (leftChild != null){
+                leftChild.remove(item);
             }
-
-            if (current.leftChild != null && current.rightChild == null){
-                if (current.parent != null){
-                    if (current.item.compareTo(current.parent.item) < 0){
-                        current.parent.leftChild = current.leftChild;
-                    }
-                    if (current.item.compareTo(current.parent.item) > 0){
-                        current.parent.rightChild = current.leftChild;
-                    }
-                }
-                current.leftChild.parent = current.parent;
-                return;
-            }
-
-            if (current.leftChild == null && current.rightChild != null){
-                if (current.parent != null){
-                    if (current.item.compareTo(current.parent.item) < 0){
-                        current.parent.leftChild = current.rightChild;
-                    }
-                    if (current.item.compareTo(current.parent.item) > 0){
-                        current.parent.rightChild = current.rightChild;
-                    }
-                }
-                current.rightChild.parent = current.parent;
-                return;
-            }
-
-            MyBinarySearchTreeNode<T> saved = current.findSuccessor();
-            T savedItem = saved.item;
-            saved.remove(savedItem);
-            current.item = savedItem;
             return;
         }
+        //if current item is smaller than searched item
+        if (compareResult < 0){
+            if (rightChild != null){
+                rightChild.remove(item);
+            }
+            return;
+        }
+        //if its the right item
 
-        if (current.item.compareTo(item) < 0){
-            if (current.rightChild != null){
-                current.rightChild.remove(item);
-            }
-        }
-        else {
-            if (current.leftChild != null){
-                current.leftChild.remove(item);
-            }
-        }
+        int position = checkParent();
+        MyBinarySearchTreeNode<T> children = checkChildren();
+//if it has two children (shouldnt matter if its the roomt)
+                if(children == this){
+                    MyBinarySearchTreeNode<T> successor = findSuccessor();
+                    this.item = successor.item;
+                    successor.remove(successor.item);
+                    return;
+                }
+//if root
+                if(position == 0){
+                    //only has one child since i already handled the two child situation
+                    if (children != null){
+                        this.item = children.item;
+                        this.leftChild = children.leftChild;
+                        this.rightChild = children.rightChild;
+                        if (leftChild != null) {
+                            leftChild.parent = this;
+                        }
+                        if (rightChild != null) {
+                            rightChild.parent = this;
+                        }
+                    }
+                    return;
+                }
+                //if not root and left child
+                if (position < 0){
+                    parent.leftChild = children;
+                }
+                else {
+                    parent.rightChild = children;
+                }
+                if (children != null) {
+                    children.parent = parent;
+                }
+
 }
 }
